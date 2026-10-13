@@ -1,0 +1,44 @@
+name: firmware
+
+on:
+  push:
+    paths: ["Firmware/**", ".github/workflows/firmware.yml"]
+  pull_request:
+    paths: ["Firmware/**", ".github/workflows/firmware.yml"]
+  workflow_dispatch:
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: Firmware
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache toolchain, Renode and Python tools
+        uses: actions/cache@v4
+        with:
+          path: ~/tools
+          key: tools-${{ runner.os }}-${{ hashFiles('Firmware/tools/setup_tools.sh') }}
+
+      - name: System packages
+        run: sudo apt-get update && sudo apt-get install -y libsdl2-dev pkg-config cppcheck python3-venv
+
+      - name: Toolchain, Renode, Robot Framework, gcovr
+        run: tools/setup_tools.sh
+
+      - name: Pipeline (build, unit, scenarios, firmware, size, lint, Renode, coverage)
+        run: tools/ci.sh
+
+      - name: Upload reports and firmware
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: inktime-${{ github.sha }}
+          path: |
+            Firmware/build/reports
+            Firmware/build/coverage
+            Firmware/build/fw/inktime.hex
+            Firmware/build/fw/inktime.elf
+            Firmware/build/fw/inktime.map

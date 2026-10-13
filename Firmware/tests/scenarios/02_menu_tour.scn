@@ -1,0 +1,64 @@
+# Every menu entry, navigated with DOWN, rendered to its own golden image.
+boot
+time 2026-10-13 09:41:00
+steps 3456
+settle
+press enter
+settle
+expect screen menu
+expect panel menu.pbm
+press enter
+settle
+expect screen steps
+expect panel steps.pbm
+press enter
+press down
+press enter
+settle
+expect screen stopwatch
+expect panel stopwatch.pbm
+hold enter 900
+press enter
+press down
+press down
+press enter
+settle
+expect screen alarm
+expect panel alarm_edit.pbm
+hold enter 900
+press enter
+press down
+press down
+press down
+press enter
+settle
+expect screen settime
+expect panel settime.pbm
+hold enter 900
+press enter
+press up
+press up
+press up
+press enter
+settle
+expect screen battery
+expect panel battery.pbm
+hold enter 900
+press enter
+press up
+press up
+press enter
+settle
+expect screen settings
+expect panel settings.pbm
+hold enter 900
+press enter
+press up
+press enter
+settle
+expect screen about
+expect panel about.pbm
+hold enter 900
+settle
+expect screen watchface
+expect noerrors

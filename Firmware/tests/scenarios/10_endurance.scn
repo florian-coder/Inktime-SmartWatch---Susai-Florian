@@ -1,0 +1,15 @@
+# Three simulated hours with activity: no protocol errors, refresh budget respected.
+boot
+time 2026-10-13 08:00:00
+settle
+steps 1200
+wait 3600000
+steps 900
+wait 3600000
+charger cc
+wait 3600000
+settle
+expect steps 2100
+expect log display: full refresh
+expect noerrors
+expect on

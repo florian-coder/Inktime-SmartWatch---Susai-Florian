@@ -1,0 +1,51 @@
+// InkTime v1 board on top of Renode's nRF52840 platform.
+// Requires the models from InkTimePeripherals.cs (`include` it before loading this file).
+// Pin numbers match src/board.h.
+using "platforms/cpus/nrf52840.repl"
+
+// The e-paper driver uses SPIM2 with EasyDMA.
+spi2:
+    easyDMA: true
+
+// UICR as plain memory so the NFCPINS word from the ELF image is visible to the firmware.
+uicr: Memory.MappedMemory @ sysbus 0x10001000
+    size: 0x1000
+
+// ---- e-paper on SPIM2: DC P0.15, RST P0.16, CS P0.05, BUSY P0.17, PWR_N P1.01
+epd: InkTime.SSD1681 @ spi2
+    Busy -> gpio0@17
+
+// ---- I2C devices on TWI0
+bma: InkTime.BMA423 @ twi0 0x18
+    Int1 -> gpio0@8
+
+fuel: InkTime.MAX17048 @ twi0 0x36
+    Alert -> gpio0@10
+
+charger: InkTime.BQ25180 @ twi0 0x6A
+    Int -> gpio0@11
+
+haptic: InkTime.DRV2605 @ twi0 0x5A
+
+// ---- buttons, active low
+btn_up: Miscellaneous.Button @ gpio0 13
+    invert: true
+    -> gpio0@13
+
+btn_enter: Miscellaneous.Button @ gpio0 14
+    invert: true
+    -> gpio0@14
+
+btn_down: Miscellaneous.Button @ gpio1 2
+    invert: true
+    -> gpio1@2
+
+// ---- MCU outputs into the models
+gpio0:
+    5 -> epd@2
+    15 -> epd@0
+    16 -> epd@1
+    12 -> haptic@0
+
+gpio1:
+    1 -> epd@3

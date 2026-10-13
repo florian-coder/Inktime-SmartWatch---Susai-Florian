@@ -1,0 +1,27 @@
+:name: InkTime
+:description: InkTime e-paper smartwatch (nRF52840) with peripheral models
+#
+# Interactive use (from the Firmware/ directory):
+#   ~/tools/renode/renode tests/renode/inktime.resc
+# then in the monitor:
+#   start
+#   btn_enter PressAndRelease          (buttons: btn_up, btn_enter, btn_down)
+#   bma AddSteps 120
+#   charger SetCharger true 1          (state: 0 none, 1 CC, 2 CV, 3 done)
+#   fuel SetBattery 4 3550
+#   epd SavePbm @/tmp/screen.pbm       (then: python3 tools/pbm2png.py /tmp/screen.pbm screen.png)
+
+$elf?=$ORIGIN/../../build/fw/inktime.elf
+
+include $ORIGIN/InkTimePeripherals.cs
+
+mach create "inktime"
+machine LoadPlatformDescription $ORIGIN/inktime.repl
+
+showAnalyzer uart0
+
+macro reset
+"""
+    sysbus LoadELF $elf
+"""
+runMacro $reset

@@ -1,0 +1,10 @@
+# Cold boot: all peripherals detected, one full refresh, watch face at the default time.
+boot
+settle
+expect log hw: epd ok imu ok fg ok chg ok hap ok
+expect log display: full refresh
+expect screen watchface
+expect full 1
+expect partial 0
+expect panel boot.pbm
+expect noerrors

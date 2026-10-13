@@ -1,0 +1,22 @@
+# Settings -> Power off, the e-paper keeps the image, ENTER wakes (reset from System OFF).
+boot
+settle
+press enter
+press up
+press up
+press enter
+press up         # POWER OFF
+expect screen settings
+press enter
+settle
+expect off
+expect log power: system off
+expect panel power_off.pbm
+wait 30000
+expect off
+press enter
+settle
+expect on
+expect log (reset 0x10000)
+expect screen watchface
+expect noerrors

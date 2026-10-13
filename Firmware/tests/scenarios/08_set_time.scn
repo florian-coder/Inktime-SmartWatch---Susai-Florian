@@ -1,0 +1,26 @@
+# Set the clock through the UI with long press + auto-repeat: 00:00 01.01.2026 -> 12:59 02.03.2028.
+boot
+settle
+press enter
+press down
+press down
+press down
+press enter
+expect screen settime
+hold up 2900       # hours: 1 long + 11 repeats = +12
+press enter
+hold down 900      # minutes: 1 long = -1 -> 59
+press enter
+press up           # day
+press enter
+press up
+press up           # month
+press enter
+press up
+press up           # year
+press enter
+settle
+expect screen watchface
+expect log clock: set to 2028-03-02 12:59
+expect panel settime_result.pbm
+expect noerrors

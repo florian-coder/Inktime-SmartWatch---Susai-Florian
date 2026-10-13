@@ -1,0 +1,21 @@
+# Stopwatch runs in the background while on the watch face.
+boot
+settle
+press enter
+press down
+press enter
+press enter      # start
+wait 30000
+hold enter 900   # home, still running
+wait 44000
+press enter
+press down
+press enter
+press enter      # stop
+settle
+expect screen stopwatch
+expect panel stopwatch_stopped.pbm
+press up         # reset
+settle
+expect panel stopwatch.pbm
+expect noerrors

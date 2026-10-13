@@ -1,0 +1,21 @@
+# Formatting rules for the InkTime firmware (checked by tools/lint.sh).
+BasedOnStyle: LLVM
+IndentWidth: 4
+ColumnLimit: 120
+BreakBeforeBraces: Linux
+IndentCaseLabels: false
+PointerAlignment: Right
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: None
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
+AlignConsecutiveMacros: AcrossComments
+AlignTrailingComments: true
+AlignAfterOpenBracket: Align
+SortIncludes: Never
+IncludeBlocks: Preserve
+SpaceBeforeParens: ControlStatements
+BinPackArguments: true
+BinPackParameters: true
+Cpp11BracedListStyle: false

@@ -1,0 +1,18 @@
+# Fuel gauge alert below 5%, plugging the charger clears the warning, 2% shuts down.
+boot
+settle
+battery 4 3550
+settle
+expect screen lowbatt
+expect log power: fuel gauge alert
+expect panel low_battery.pbm
+charger cc
+settle
+expect screen watchface
+charger off
+battery 2 3400
+wait 61000
+settle
+expect screen off
+expect off
+expect noerrors

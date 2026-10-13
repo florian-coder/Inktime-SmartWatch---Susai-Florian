@@ -1,0 +1,17 @@
+# A morning: minute ticks, steps from the IMU interrupt, charger plugged in.
+boot
+time 2026-10-13 09:41:00
+settle
+steps 3456
+wait 60000
+settle
+expect steps 3456
+expect panel watchface_steps.pbm
+charger cc
+settle
+expect log power: 87% 3950mV usb=1 charging=1
+expect panel watchface_charging.pbm
+charger done
+settle
+expect panel watchface_full.pbm
+expect noerrors

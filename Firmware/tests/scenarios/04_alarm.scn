@@ -1,0 +1,26 @@
+# Set an alarm through the UI, let it ring, dismiss it.
+boot
+time 2026-10-13 06:59:00
+settle
+press enter
+press down
+press down
+press enter
+press up         # ON
+press enter      # hour 07
+press enter      # minute 00
+press enter      # save
+expect log alarm: on 07:00
+hold enter 900
+settle
+expect panel watchface_alarm_set.pbm
+wait 60000
+expect log alarm: ringing
+expect screen ringing
+expect haptic 14
+settle
+expect panel ringing.pbm
+press up
+settle
+expect screen watchface
+expect noerrors

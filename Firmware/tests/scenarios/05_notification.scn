@@ -1,0 +1,14 @@
+# A notification interrupts the menu and returns to it.
+boot
+settle
+press enter
+settle
+notify Meeting with the PM team at 14:30 in room EC105
+settle
+expect screen notify
+expect haptic 10
+expect panel notification.pbm
+press down
+settle
+expect screen menu
+expect noerrors
