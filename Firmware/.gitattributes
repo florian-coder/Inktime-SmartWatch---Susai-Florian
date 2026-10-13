@@ -1,0 +1,7 @@
+# Keep scripts runnable on Linux CI even when committed from Windows.
+*.sh   text eol=lf
+*.py   text eol=lf
+*.robot text eol=lf
+*.scn  text eol=lf
+# Golden screen images are compared byte for byte.
+*.pbm  binary

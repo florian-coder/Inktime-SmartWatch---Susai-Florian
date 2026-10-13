@@ -169,7 +169,7 @@ size: $(FW_ELF)
 	$(Q)python3 -I tools/check_size.py $(FW_SIZE) $(FW_ELF)
 
 lint:
-	$(Q)tools/lint.sh
+	$(Q)bash tools/lint.sh
 
 CLANG_FORMAT ?= $(firstword $(wildcard $(TOOLS_DIR)/venv/bin/clang-format) clang-format)
 format:
@@ -192,7 +192,7 @@ coverage:
 	else echo "gcovr not installed: raw .gcda files are in $(COV_DIR)"; fi
 
 ci:
-	$(Q)tools/ci.sh
+	$(Q)bash tools/ci.sh
 
 run: $(SIM_BIN)
 	$(SIM_BIN)
